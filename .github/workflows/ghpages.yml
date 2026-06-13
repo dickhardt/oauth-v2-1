@@ -7,12 +7,14 @@ on:
     - CONTRIBUTING.md
     - LICENSE.md
     - .gitignore
+    - '.github/**'
   pull_request:
     paths-ignore:
     - README.md
     - CONTRIBUTING.md
     - LICENSE.md
     - .gitignore
+    - '.github/**'
 
 jobs:
   build:
@@ -23,14 +25,14 @@ jobs:
       VENVDIR: /tmp/.venv
     steps:
     - name: "Checkout"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
 
     - name: "Setup"
       id: setup
       run: date -u "+::set-output name=date::%FT%T"
 
     - name: "Caching"
-      uses: actions/cache@v3
+      uses: actions/cache@v5
       with:
         path: |
           ${{ env.XML2RFC_REFCACHEDIR }}
@@ -54,7 +56,7 @@ jobs:
         token: ${{ github.token }}
 
     - name: "Archive Built Drafts"
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         path: |
           draft-*.html
